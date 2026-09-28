@@ -130,7 +130,7 @@ Chunking uses Spring AI `TokenTextSplitter` with a configurable size and overlap
 
 Vector similarity is a strong recall mechanism, not a perfect final ranking: lexical matches, query intent, and duplicate/near-duplicate chunks can affect ordering. `RerankingService` is deliberately isolated so a cross-encoder or hosted reranker can replace the baseline later.
 
-## Interview explanation
+##  explanation
 
 Basic RAG is `question -> retrieve relevant passages -> put passages in a prompt -> generate an answer`. Advanced RAG adds controls at each stage: rewriting resolves follow-up references, multi-query retrieval improves recall, metadata filters constrain the search space, reranking improves precision, and context filtering removes duplicates and stays within the model budget.
 
@@ -140,12 +140,5 @@ Query rewriting turns a question such as “What are its advantages?” into a s
 
 The grounded prompt tells the model to use retrieved facts, admit missing information, and cite filename and page. This reduces hallucination, but does not eliminate it; groundedness and citation correctness still need evaluation. RAG is usually preferable to fine-tuning for changing enterprise documents: the source remains updateable and inspectable, while fine-tuning changes model behavior rather than acting as a document index. Conversation memory is useful for follow-ups but is capped to prevent prompt growth and accidental overexposure.
 
-Evaluation should report retrieval relevance (did the right source appear?), answer relevance (did it answer the question?), groundedness (are claims supported?), and citation correctness (do cited pages support the claims?). The fixture under `src/test/resources/evaluation/questions.json` is the starting point for automated checks.
 
-## Evaluation
 
-`src/test/resources/evaluation/questions.json` contains a small expected-source dataset. The service logs query, rewrite, candidate count, selected count, and response length without logging keys or document content. Evaluate retrieval relevance, answer relevance, groundedness, and citation correctness against that fixture.
-
-## Security
-
-Credentials and prompts stay in server-side configuration. Never commit `.env` files or API keys. The API returns source metadata only, not Pinecone internals.
