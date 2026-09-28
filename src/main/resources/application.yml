@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: enterprise-document-intelligence
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      chat:
+        options:
+          model: ${OPENAI_CHAT_MODEL:gpt-4o-mini}
+          temperature: ${OPENAI_TEMPERATURE:0.1}
+      embedding:
+        options:
+          model: ${OPENAI_EMBEDDING_MODEL:text-embedding-3-small}
+    vectorstore:
+      pinecone:
+        api-key: ${PINECONE_API_KEY:}
+        environment: ${PINECONE_ENVIRONMENT:us-east-1-aws}
+        index-name: ${PINECONE_INDEX_NAME:enterprise-rag}
+        namespace: ${PINECONE_NAMESPACE:default}
+        initialize-schema: false
+  servlet:
+    multipart:
+      max-file-size: ${MAX_FILE_SIZE:25MB}
+      max-request-size: ${MAX_REQUEST_SIZE:100MB}
+
+server:
+  error:
+    include-message: always
+
+rag:
+  chunk-size: ${RAG_CHUNK_SIZE:900}
+  chunk-overlap: ${RAG_CHUNK_OVERLAP:150}
+  retrieval-top-k: ${RAG_RETRIEVAL_TOP_K:12}
+  final-context-chunks: ${RAG_FINAL_CONTEXT_CHUNKS:6}
+  max-context-characters: ${RAG_MAX_CONTEXT_CHARACTERS:18000}
+  history-limit: ${RAG_HISTORY_LIMIT:8}
+  multi-query-limit: ${RAG_MULTI_QUERY_LIMIT:3}
+
+logging:
+  level:
+    com.example.rag: INFO

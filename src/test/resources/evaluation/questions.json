@@ -1,0 +1,5 @@
+[
+  {"question":"What is the document retention period?","expectedSources":["employee-policy.pdf"]},
+  {"question":"Who approves remote work exceptions?","expectedSources":["employee-policy.pdf"]},
+  {"question":"What are the incident response priorities?","expectedSources":["security-handbook.pdf"]}
+]
