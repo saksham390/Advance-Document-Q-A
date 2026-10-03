@@ -1,4 +1,4 @@
-# Advanced Enterprise Document Intelligence System using Spring AI and Pinecone
+# Advanced Enterprise Document Intelligence System using Spring AI 
 
 A page-aware, conversational Advanced RAG API built with Java 17, Spring Boot 3.4, Spring AI 1.0, OpenAI, Pinecone, and PDFBox.
 
